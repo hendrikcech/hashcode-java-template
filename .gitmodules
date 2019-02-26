@@ -1,0 +1,3 @@
+[submodule "problems/pizza"]
+	path = problems/pizza
+	url = git@github.com:jboockmann/hashcode-practice-problem.git
