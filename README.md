@@ -29,5 +29,5 @@ In order to use the template to solve a new problem you have to provide classes 
 
 1. Implement a `Parser` and a `Problem` class to fit your needs, i.e., by adding attributes and methods to each class. Hint: JUnit test cases are helpful during the development of the `Parser` class; you can find an example in the implementation of the practice problem.
 2. Implement one or multiple `Solver` classes.
-3. Implement a `Main` class that connects the output with the input of the respective components. You may want to take a look at the `Main` class of the practice problem.
+3. Implement a `Main` class that connects the output with the input of the respective components. You may want to take a look at the `Main` class of the implementation of the practice problem.
  
