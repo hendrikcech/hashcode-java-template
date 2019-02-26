@@ -12,46 +12,43 @@ import template.ParserException;
 
 public class PizzaParser extends Parser {
 
-    final static String headerDelimeter = " ";
-    private final Path path;
-    private final PizzaProblem problem;
+	final static String headerDelimeter = " ";
+	Path path;
+	PizzaProblem problem;
 
-    public PizzaParser(Path path) {
-	this.path = path;
-	problem = new PizzaProblem();
-    }
+	public PizzaProblem parse(Path path) throws ParserException {
+		this.path = path;
+		problem = new PizzaProblem();
 
-    @Override
-    public PizzaProblem parse() throws ParserException {
-	List<String> lines;
-	try {
-	    lines = Files.readAllLines(path, StandardCharsets.US_ASCII);
-	    parseHeader(lines.get(0));
-	    lines.remove(0);
-	    problem.pizza = lines;
-	    return problem;
-	} catch (IOException e) {
-	    throw new ParserException(e);
-	}
-    }
-
-    private void parseHeader(String line) throws ParserException {
-	String[] strParts = line.split(headerDelimeter);
-	if (strParts.length != 4) {
-	    throw new ParserException("Header row must contain 4 ints");
+		List<String> lines;
+		try {
+			lines = Files.readAllLines(path, StandardCharsets.US_ASCII);
+			parseHeader(lines.get(0));
+			lines.remove(0);
+			problem.pizza = lines;
+			return problem;
+		} catch (IOException e) {
+			throw new ParserException(e);
+		}
 	}
 
-	try {
-	    /*- 0: rows, 1: columns, 2: min ingredients per slice, 3: max cells per slice */
-	    int[] parts = Arrays.stream(strParts).mapToInt(Integer::parseInt).toArray();
-	    problem.rows = parts[0];
-	    problem.columns = parts[1];
-	    problem.minimumIngredients = parts[2];
-	    problem.maxCells = parts[3];
+	private void parseHeader(String line) throws ParserException {
+		String[] strParts = line.split(headerDelimeter);
+		if (strParts.length != 4) {
+			throw new ParserException("Header row must contain 4 ints");
+		}
 
-	} catch (NumberFormatException e) {
-	    throw new ParserException("Header row must only contain ints", e);
+		try {
+			/*- 0: rows, 1: columns, 2: min ingredients per slice, 3: max cells per slice */
+			int[] parts = Arrays.stream(strParts).mapToInt(Integer::parseInt).toArray();
+			problem.rows = parts[0];
+			problem.columns = parts[1];
+			problem.minimumIngredients = parts[2];
+			problem.maxCells = parts[3];
+
+		} catch (NumberFormatException e) {
+			throw new ParserException("Header row must only contain ints", e);
+		}
 	}
-    }
 
 }

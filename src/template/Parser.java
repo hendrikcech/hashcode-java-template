@@ -1,8 +1,10 @@
 package template;
 
+import java.nio.file.Path;
+
 public abstract class Parser {
 
-    public Problem parse() throws ParserException {
+    public Problem parse(Path path) throws ParserException {
 	throw new UnsupportedOperationException();
     };
 
